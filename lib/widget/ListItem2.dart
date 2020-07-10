@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ListItem2 extends StatelessWidget {
-  String title;
-  int count;
+  final String title;
   ListItem2({this.title});
 
   @override

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ListItem extends StatelessWidget {
-  String title;
-  int count;
-  Function handleTap;
+  final String title;
+  final int count;
+  final Function handleTap;
   ListItem({this.title, this.count, this.handleTap});
 
   @override

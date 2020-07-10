@@ -6,6 +6,8 @@ import '../bloc/ListBLoc2.dart';
 import '../widget/ListItem.dart';
 import 'Screen2.dart';
 
+import '../model/CheckList.dart';
+
 class Screen1 extends StatelessWidget {
   static String id = 'Screen1';
   const Screen1({Key key}) : super(key: key);
@@ -20,11 +22,14 @@ class Screen1 extends StatelessWidget {
       body: Center(
         child: Consumer<ListBLoc1>(
           builder: (context, _listBLoc1, child) {
-            return StreamBuilder(
+            return StreamBuilder<List<CheckList>>(
               initialData: [],
               stream: _listBLoc1.stream,
               builder: (context, snapshot) {
-                var value = snapshot.data;
+                if (snapshot.data == null) {
+                  return SizedBox.shrink();
+                }
+                List<CheckList> value = snapshot.data;
                 return ListView.builder(
                     itemCount: value.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -32,7 +37,8 @@ class Screen1 extends StatelessWidget {
                           title: value[index].name,
                           count: value[index].questions.length,
                           handleTap: () {
-                            Provider.of<ListBLoc2>(context, listen: false).getQuestions(value[index].questions);
+                            Provider.of<ListBLoc2>(context, listen: false)
+                                .getQuestions(value[index].questions);
                             Navigator.of(context).pushNamed(Screen2.id);
                           });
                     });
