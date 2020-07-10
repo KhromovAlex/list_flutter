@@ -16,33 +16,16 @@ class _Screen2State extends State<Screen2> {
 
   bool handleNotificationListener(ScrollNotification scrollNotification) {
     if (scrollNotification is OverscrollNotification) {
-      print(scrollNotification.overscroll);
       if (isTopScroll == true && scrollNotification.overscroll < -5) {
-        // print(scrollNotification.overscroll);
         Navigator.of(context).pop();
       }
     }
-    if (scrollNotification is ScrollStartNotification) {
-      if (scrollNotification.metrics.extentAfter ==
-          scrollNotification.metrics.extentBefore) {
-        setState(() {});
-      }
-    }
-    if (scrollNotification is ScrollUpdateNotification) {
-      if (isTopScroll == true && scrollNotification.metrics.pixels == 0.0) {}
-      if (scrollNotification.metrics.pixels == 0.0) {
-      } else {
+    if (scrollNotification is ScrollUpdateNotification && scrollNotification.metrics.pixels != 0.0) {
         setState(() {
           isTopScroll = false;
         });
-      }
     }
     if (scrollNotification is ScrollEndNotification) {
-      if (scrollNotification.metrics.extentAfter != 0.0 &&
-          scrollNotification.metrics.pixels == 0.0 &&
-          isTopScroll == true) {}
-      if (scrollNotification.metrics.extentAfter == 0.0 &&
-          isTopScroll == true) {}
       if (scrollNotification.metrics.pixels == 0.0) {
         setState(() {
           isTopScroll = true;
@@ -60,29 +43,38 @@ class _Screen2State extends State<Screen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Screen 2'),
-        backgroundColor: Color(0xFF3D9098),
-      ),
-      body: Center(
-        child: Consumer<ListBLoc2>(
-          builder: (context, _listBLoc2, child) {
-            return StreamBuilder(
-              initialData: [],
-              stream: _listBLoc2.stream,
-              builder: (context, snapshot) {
-                var value = snapshot.data;
-                return NotificationListener(
-                  onNotification: handleNotificationListener,
-                  child: ListView.builder(
-                      itemCount: value.length,
-                      itemBuilder: (BuildContext ctxt, int index) {
-                        return ListItem2(title: value[index].toString());
-                      }),
+      body: NotificationListener(
+        onNotification: handleNotificationListener,
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              pinned: true,
+              expandedHeight: 250.0,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text('Screen 2'),
+              ),
+            ),
+            Consumer<ListBLoc2>(
+              builder: (context, _listBLoc2, child) {
+                return StreamBuilder(
+                  initialData: [],
+                  stream: _listBLoc2.stream,
+                  builder: (context, snapshot) {
+                    var value = snapshot.data;
+                    return SliverToBoxAdapter(
+                      child: ListView.builder(
+                          controller: ScrollController(),
+                          shrinkWrap: true,
+                          itemCount: value.length,
+                          itemBuilder: (BuildContext ctxt, int index) {
+                            return ListItem2(title: value[index].toString());
+                          }),
+                    );
+                  },
                 );
               },
-            );
-          },
+            )
+          ],
         ),
       ),
     );
