@@ -11,7 +11,7 @@ class CheckInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SwipeToNavigate.vertical(
+      body: SwipeToNavigate(
         handleToBottom: () {
           Navigator.of(context).pushNamed(CheckGroupScreen.id);
         },

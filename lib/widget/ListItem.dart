@@ -24,7 +24,7 @@ class ListItem extends StatelessWidget {
         child: ListTile(
           title: Text('$title'),
           trailing: Text(
-            '$count',
+            '${count ?? ""}',
             style: TextStyle(
               color: Colors.grey,
               fontSize: 20,

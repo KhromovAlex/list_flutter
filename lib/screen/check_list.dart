@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../bloc/CheckListBLoc.dart';
+import '../bloc/check_question_bloc.dart';
 import '../widget/ListItem.dart';
 import '../widget/SwipeToNavigate.dart';
-import 'check_question.dart';
+import 'check_question_box.dart';
 import '../widget/AppBarCustom.dart';
 
 class CheckListScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _CheckListScreenState extends State<CheckListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SwipeToNavigate.vertical(
+      body: SwipeToNavigate(
         handleToTop: () {
           Navigator.of(context).pop();
         },
@@ -45,8 +46,11 @@ class _CheckListScreenState extends State<CheckListScreen> {
                             return ListItem(
                               title: value[index].toString(),
                               handleTap: () {
+                                Provider.of<CheckQuestionBLoc>(context,
+                                          listen: false)
+                                      .getQuestions({'value': value, 'index': index});
                                 Navigator.of(context)
-                                    .pushNamed(CheckQuestionScreen.id);
+                                    .pushNamed(CheckQuestionBoxScreen.id);
                               },
                             );
                           }),

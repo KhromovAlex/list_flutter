@@ -18,7 +18,7 @@ class CheckGroupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SwipeToNavigate.vertical(
+      body: SwipeToNavigate(
         handleToTop: () {
           Navigator.of(context).pushNamed(CheckInfoScreen.id);
         },
@@ -30,10 +30,10 @@ class CheckGroupScreen extends StatelessWidget {
               ),
             ),
             Consumer<CheckGroupBLoc>(
-              builder: (context, _listBLoc1, child) {
+              builder: (context, checkGroupBLoc, child) {
                 return StreamBuilder<List<CheckListModel>>(
                   initialData: [],
-                  stream: _listBLoc1.stream,
+                  stream: checkGroupBLoc.stream,
                   builder: (context, snapshot) {
                     if (snapshot.data == null) {
                       return SizedBox.shrink();

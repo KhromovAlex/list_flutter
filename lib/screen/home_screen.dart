@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
         onRefresh: () {
           return;
         },
-        child: SwipeToNavigate.vertical(
+        child: SwipeToNavigate(
           handleToBottom: () {
             Navigator.of(context).pushNamed(HistoryScreen.id);
           },

@@ -10,7 +10,7 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SwipeToNavigate.vertical(
+      body: SwipeToNavigate(
         handleToTop: () {
           Navigator.of(context).pushNamed(HomeScreen.id);
         },
