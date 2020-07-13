@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 
-import '../model/CheckList.dart';
+import '../model/CheckListModel.dart';
 
 class ListBLoc1 {
-  BehaviorSubject _controller = BehaviorSubject<List<CheckList>>();
+  BehaviorSubject _controller = BehaviorSubject<List<CheckListModel>>();
 
   ListBLoc1() {
     _controller.add([
-      CheckList(name: "Test 1", questions: [
+      CheckListModel(name: "Test 1", questions: [
         "Question 1",
         "Question 2",
         "Question 3",
@@ -34,13 +34,11 @@ class ListBLoc1 {
         "Question 23",
         "Question 24"
       ]),
-      CheckList(name: "Test 2", questions: [
+      CheckListModel(name: "Test 2", questions: [
         "Question 1",
         "Question 2",
         "Question 3",
-
       ]),
-      
     ]);
   }
 

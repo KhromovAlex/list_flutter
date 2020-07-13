@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'bloc/ListBLoc1.dart';
 import 'bloc/ListBLoc2.dart';
 
-import 'screen/Screen1.dart';
-import 'screen/Screen2.dart';
+import 'screen/check_group.dart';
+import 'screen/check_list.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,10 +25,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'List',
-        home: Screen1(),
+        home: CheckGroupScreen(),
         routes: <String, WidgetBuilder>{
-          Screen1.id: (BuildContext context) => Screen1(),
-          Screen2.id: (BuildContext context) => Screen2(),
+          CheckGroupScreen.id: (BuildContext context) => CheckGroupScreen(),
+          CheckListScreen.id: (BuildContext context) => CheckListScreen(),
         },
       ),
     );

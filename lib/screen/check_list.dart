@@ -3,55 +3,30 @@ import 'package:provider/provider.dart';
 
 import '../bloc/ListBLoc2.dart';
 import '../widget/ListItem2.dart';
+import '../widget/SwipeToNavigate.dart';
 
-class Screen2 extends StatefulWidget {
-  static String id = 'Screen2';
+class CheckListScreen extends StatefulWidget {
+  static String id = 'CheckList';
 
   @override
-  _Screen2State createState() => _Screen2State();
+  _CheckListScreenState createState() => _CheckListScreenState();
 }
 
-class _Screen2State extends State<Screen2> {
-  bool isTopScroll;
-
-  bool handleNotificationListener(ScrollNotification scrollNotification) {
-    if (scrollNotification is OverscrollNotification) {
-      if (isTopScroll == true && scrollNotification.overscroll < -5) {
-        Navigator.of(context).pop();
-      }
-    }
-    if (scrollNotification is ScrollUpdateNotification && scrollNotification.metrics.pixels != 0.0) {
-        setState(() {
-          isTopScroll = false;
-        });
-    }
-    if (scrollNotification is ScrollEndNotification) {
-      if (scrollNotification.metrics.pixels == 0.0) {
-        setState(() {
-          isTopScroll = true;
-        });
-      }
-    }
-  }
-
-  @override
-  void initState() {
-    isTopScroll = true;
-    super.initState();
-  }
-
+class _CheckListScreenState extends State<CheckListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NotificationListener(
-        onNotification: handleNotificationListener,
+      body: SwipeToNavigate.top(
+        action: () {
+          Navigator.of(context).pop();
+        },
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
               pinned: true,
               expandedHeight: 250.0,
               flexibleSpace: FlexibleSpaceBar(
-                title: Text('Screen 2'),
+                title: Text('CheckListScreen'),
               ),
             ),
             Consumer<ListBLoc2>(

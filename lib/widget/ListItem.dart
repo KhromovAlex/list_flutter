@@ -15,7 +15,10 @@ class ListItem extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.black26, offset: Offset(2, 2), blurRadius: 5)],
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black26, offset: Offset(2, 2), blurRadius: 5)
+          ],
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: ListTile(
