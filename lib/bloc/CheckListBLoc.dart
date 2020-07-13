@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 
-class ListBLoc2 {
+class CheckListBLoc {
   var _controller = BehaviorSubject<List>();
 
   Stream get stream => _controller.stream;

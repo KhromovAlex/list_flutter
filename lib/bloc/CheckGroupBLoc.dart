@@ -3,10 +3,10 @@ import 'package:rxdart/rxdart.dart';
 
 import '../model/CheckListModel.dart';
 
-class ListBLoc1 {
+class CheckGroupBLoc {
   BehaviorSubject _controller = BehaviorSubject<List<CheckListModel>>();
 
-  ListBLoc1() {
+  CheckGroupBLoc() {
     _controller.add([
       CheckListModel(name: "Test 1", questions: [
         "Question 1",

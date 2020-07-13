@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'bloc/ListBLoc1.dart';
-import 'bloc/ListBLoc2.dart';
+// bloc
+import 'bloc/CheckGroupBLoc.dart';
+import 'bloc/CheckListBLoc.dart';
 
+// screeens
+import 'screen/home_screen.dart';
+import 'screen/check_info.dart';
 import 'screen/check_group.dart';
 import 'screen/check_list.dart';
+import 'screen/history_screen.dart';
+import 'screen/check_question.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,19 +22,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<ListBLoc1>(
-          create: (_) => ListBLoc1(),
+        Provider<CheckGroupBLoc>(
+          create: (_) => CheckGroupBLoc(),
         ),
-        Provider<ListBLoc2>(
-          create: (_) => ListBLoc2(),
+        Provider<CheckListBLoc>(
+          create: (_) => CheckListBLoc(),
         ),
       ],
       child: MaterialApp(
         title: 'List',
-        home: CheckGroupScreen(),
+        home: HomeScreen(),
         routes: <String, WidgetBuilder>{
+          HomeScreen.id: (BuildContext context) => HomeScreen(),
+          HistoryScreen.id: (BuildContext context) => HistoryScreen(),
           CheckGroupScreen.id: (BuildContext context) => CheckGroupScreen(),
           CheckListScreen.id: (BuildContext context) => CheckListScreen(),
+          CheckInfoScreen.id: (BuildContext context) => CheckInfoScreen(),
+          CheckQuestionScreen.id: (BuildContext context) => CheckQuestionScreen(),
         },
       ),
     );

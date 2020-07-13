@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../bloc/ListBLoc2.dart';
-import '../widget/ListItem2.dart';
+import '../bloc/CheckListBLoc.dart';
+import '../widget/ListItem.dart';
 import '../widget/SwipeToNavigate.dart';
+import 'check_question.dart';
+import '../widget/AppBarCustom.dart';
 
 class CheckListScreen extends StatefulWidget {
-  static String id = 'CheckList';
+  static String id = 'CheckListScreen';
 
   @override
   _CheckListScreenState createState() => _CheckListScreenState();
@@ -16,20 +18,18 @@ class _CheckListScreenState extends State<CheckListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SwipeToNavigate.top(
-        action: () {
+      body: SwipeToNavigate.vertical(
+        handleToTop: () {
           Navigator.of(context).pop();
         },
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              pinned: true,
-              expandedHeight: 250.0,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text('CheckListScreen'),
+            SliverToBoxAdapter(
+              child: AppBarCustom(
+                title: 'List',
               ),
             ),
-            Consumer<ListBLoc2>(
+            Consumer<CheckListBLoc>(
               builder: (context, _listBLoc2, child) {
                 return StreamBuilder(
                   initialData: [],
@@ -41,8 +41,14 @@ class _CheckListScreenState extends State<CheckListScreen> {
                           controller: ScrollController(),
                           shrinkWrap: true,
                           itemCount: value.length,
-                          itemBuilder: (BuildContext ctxt, int index) {
-                            return ListItem2(title: value[index].toString());
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListItem(
+                              title: value[index].toString(),
+                              handleTap: () {
+                                Navigator.of(context)
+                                    .pushNamed(CheckQuestionScreen.id);
+                              },
+                            );
                           }),
                     );
                   },
